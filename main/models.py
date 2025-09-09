@@ -6,7 +6,7 @@ class News(models.Model):
         ('sepatu', 'Sepatu Bola'),
         ('jersey', 'Jersey'),
         ('training', 'Celana Training'),
-        ('jaket', 'Jaket')
+        ('jaket', 'Jaket'),
         ('bola', 'Bola'),
         ('tas', 'Tas Bola'),
         ('poster', 'Poster'),
@@ -17,7 +17,7 @@ class News(models.Model):
     SIZE_CHOICES = [
         ('s', 'S'),
         ('m', 'M'),
-        ('l', 'L')
+        ('l', 'L'),
         ('xl', 'XL'),
         ('xxl', 'XXL'),
     ]
