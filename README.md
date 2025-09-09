@@ -1,19 +1,39 @@
-link pws:
+LINK PWS: https://putri-hamidah-cscorner.pbp.cs.ui.ac.id
 
 IMPLEMENTASI STEP BY STEP
-1. Membuat Direktori dan Mengaktifkan Virtual Environment
-2. Menyiapkan Dependencies dengan membuat requirements.txt dan Membuat Proyek Django bernama CScorner
-3. Konfigurasi Environment Variables dan Proyek
-4. Menjalankan Server
+1. Membuat direktori dan repositori github untuk CS Corner
+2. Mengaktifkan virtual environment
+3. Menyiapkan Dependencies dengan membuat requirements.txt dan membuat proyek Django bernama CScorner
+4. Membuat .env dan .env.prod sesuai kredensial database
+5. Modifikasi settings.py
+6. migrate dan runserver (routing) untuk check apakah udah ada animasi roket di localhost
+7. git add, commit "unggah proyek done", dan push
+8. Membuat proyek cscorner di PWS, ubah environs, tambahkan URL deployment PWS di settings.py
+9. Menambahkan .gitignore serta add, commit "pws", dan push ke github. Dan juga remote add pws, branch, dan push pws
+10. Membuat aplikasi 'main', modifikasi settings.py yang INSTALLED_APPS
+11. Di main, buat direktori templates lalu buat main.html yang berisi nama aplikasi, nama, dan kelas
+12. Modifikasi models.py sesuai atribut yang saya inginkan, lalu migrasi model
+13. Integrasi komponen MVT dengan tambahkan modul render dan show_main pada views.py di main, terus modifikasi template main.html yang udah di definisikam dalam context
+14. Konfigurasi routing URL di urls.py aplikasi main. Lalu modifikasi urls.py CScorner
+15. Routing dengan runserver dan check localhost
+16. Push ke github, commit "sebelum unit test", dan juga push pws. Saat check link PWS, hasilnya 404 not found
+17. Setelah di check, ada SyntaxError di models.py
+18. Migrate dan routing runserver lagi. Localhost sudah menampilkan halamannya
+19. Add, commit "push otw deploy", push ke github dan pws
+20. Modifikasi isi README, lalu add, commit "finish + update readme", push ke github
 
 BAGAN REQUEST CLIENT KE WEB
-1. Request Klien: Pengguna mengakses URL tertentu di peramban web.
-2. urls.py: Django menerima permintaan dan mencocokkan URL dengan pola yang terdaftar di urls.py. Pola ini mengarahkan permintaan ke view function yang sesuai. Jika URL tidak ditemukan, Django akan memberikan respons 404 Not Found.
-3. views.py: Berkas ini berisi logika bisnis. View menerima permintaan, memprosesnya, dan menentukan data apa yang dibutuhkan. Untuk mendapatkan atau memanipulasi data, view akan berinteraksi dengan Model.
-4. models.py (Opsional): Model adalah representasi data dan logika bisnis. View menggunakan Model (melalui Django ORM) untuk berinteraksi dengan basis data tanpa perlu menulis SQL langsung.
-5. views.py (lanjutan): Setelah mendapatkan data dari Model, view akan mengirimkan data tersebut ke Template untuk ditampilkan.
-6. Berkas HTML (Template): Template adalah berkas HTML yang menampilkan data yang dikirimkan oleh view. Template menggunakan sintaks khusus Django untuk menampilkan data secara dinamis.
-7. Response Klien: Django mengirimkan respons berupa halaman HTML yang sudah terisi data kepada klien.
+![BAGAN FRAMEWORK](image.png)
+Link referensi: https://medium.com/pythons-gurus/understanding-djangos-workflow-a-visual-guide-adb3867fb042 
+Alur dimulai ketika pengguna mengirimkan user request dari peramban web ke Django. 
+* urls.py
+Request ini berupa URL yang akan diterima oleh URL Dispatcher (urls.py). Django mencocokan URL dengan pola yang ada di urls.py. 
+* views.py
+Jika cocok, request diteruskan ke View (views.py). Jika tidak cocok, Django memberi output 404 Not Found. View menangani logika yang ditampilkan pengguna.
+* models.py
+Jika perlu data dari database, View memanggil Model (models.py) untuk mengambil dan memproses data, lalu hasilnya dikembalikan ke View. Model bertugas untuk mengatur dan mengelola data pada sebuah aplikasi.
+* berkas HTML
+Setelah itu, View mengirim data ke Template agar diubah menjadi halaman HTML. Template adalah berkas HTML yang menampilkan data yang dikirimkan oleh view. Halaman HTML yang sudah jadi dikirim kembali ke pengguna dan ditampilkan di peramban web.
 
 PERAN settings.py
 1. Mendaftarkan semua aplikasi yang aktif dalam proyek di INSTALLED_APPS. Dengan mendaftarkan aplikasi, Django menemukan models.py, template, dan berkasi lain dari aplikasi tersebut.
