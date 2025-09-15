@@ -5,8 +5,7 @@
 <h1>{{ items.name }}</h1>
 <p>
     <b>Category:</b>{{ items.get_category_display }} {% if items.is_featured %} | 
-    <b>Featured</b>{% endif %}{% if news.is_news_hot %} | 
-    <b>Hot</b>{% endif %} | Views: {{ items.items_views }}
+    <b>Featured</b>{% endif %} | Views: {{ items.items_views }}
     <br>
     <b>Price:</b> Rp{{ items.price }}
     {% if items.get_size_display %}

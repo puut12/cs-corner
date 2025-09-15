@@ -1,58 +1,48 @@
 LINK PWS: https://putri-hamidah-cscorner.pbp.cs.ui.ac.id
 
-IMPLEMENTASI STEP BY STEP
-1. Membuat direktori dan repositori github untuk CS Corner
-2. Mengaktifkan virtual environment
-3. Menyiapkan Dependencies dengan membuat requirements.txt dan membuat proyek Django bernama CScorner
-4. Membuat .env dan .env.prod sesuai kredensial database
-5. Modifikasi settings.py
-6. migrate dan runserver (routing) untuk check apakah udah ada animasi roket di localhost
-7. git add, commit "unggah proyek done", dan push
-8. Membuat proyek cscorner di PWS, ubah environs, tambahkan URL deployment PWS di settings.py
-9. Menambahkan .gitignore serta add, commit "pws", dan push ke github. Dan juga remote add pws, branch, dan push pws
-10. Membuat aplikasi 'main', modifikasi settings.py yang INSTALLED_APPS
-11. Di main, buat direktori templates lalu buat main.html yang berisi nama aplikasi, nama, dan kelas
-12. Modifikasi models.py sesuai atribut yang saya inginkan, lalu migrasi model
-13. Integrasi komponen MVT dengan tambahkan modul render dan show_main pada views.py di main, terus modifikasi template main.html yang udah di definisikam dalam context
-14. Konfigurasi routing URL di urls.py aplikasi main. Lalu modifikasi urls.py CScorner
-15. Routing dengan runserver dan check localhost
-16. Push ke github, commit "sebelum unit test", dan juga push pws. Saat check link PWS, hasilnya 404 not found
-17. Setelah di check, ada SyntaxError di models.py
-18. Migrate dan routing runserver lagi. Localhost sudah menampilkan halamannya
-19. Add, commit "push otw deploy", push ke github dan pws
-20. Modifikasi isi README, lalu add, commit "finish + update readme", push ke github
+Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+Jawaban:
+Data delivery diperlukan untuk saling tukar informasi yang berbeda di sebuah platform. Dalam sebuah platform, data dikirimkan dari satu stack ke stack lainnya.
 
-BAGAN REQUEST CLIENT KE WEB
-![BAGAN FRAMEWORK](image.png)
-Link referensi: https://medium.com/pythons-gurus/understanding-djangos-workflow-a-visual-guide-adb3867fb042 
-Alur dimulai ketika pengguna mengirimkan user request dari peramban web ke Django. 
-* urls.py
-Request ini berupa URL yang akan diterima oleh URL Dispatcher (urls.py). Django mencocokan URL dengan pola yang ada di urls.py. 
-* views.py
-Jika cocok, request diteruskan ke View (views.py). Jika tidak cocok, Django memberi output 404 Not Found. View menangani logika yang ditampilkan pengguna.
-* models.py
-Jika perlu data dari database, View memanggil Model (models.py) untuk mengambil dan memproses data, lalu hasilnya dikembalikan ke View. Model bertugas untuk mengatur dan mengelola data pada sebuah aplikasi.
-* berkas HTML
-Setelah itu, View mengirim data ke Template agar diubah menjadi halaman HTML. Template adalah berkas HTML yang menampilkan data yang dikirimkan oleh view. Halaman HTML yang sudah jadi dikirim kembali ke pengguna dan ditampilkan di peramban web.
+Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Jawaban:
+XML dan JSON sebenarnya sama-sama self describing dan mudah dimengerti, tapi memang JSON lebih populer. 
+Alasan JSON lebih populer yaitu:
+1. JSON lebih ringkas karena tidak ada tag pembuka dan penutup seperti XML
+2. Format JSON mudah dibaca dan ditulis karena mirip objek JavaScript
+3. JSON terintegrasi dengan JavaScript jadi pertukaran data lebih efisien
 
-PERAN settings.py
-1. Mendaftarkan semua aplikasi yang aktif dalam proyek di INSTALLED_APPS. Dengan mendaftarkan aplikasi, Django menemukan models.py, template, dan berkasi lain dari aplikasi tersebut.
-2. Mengatur konfigurasi database di DATABASES. DATABASES adalah inti dari koneksi Django dengan database. Disini, ada engine database yang digunakan, nama databasem kredensial pengguna, host, dan port. Dengan konfigurasi, Django dapat berinteraksi dengan database tanpa perlu menulis kode SQL yang masih raw.
-3. Mendefinisikan lokasi urls.py utama. ROOT_URLCONF memberi tahu Django menemukan file urls.py utama proyek. File ini memproses dan mengarahkan setiap request yang masuk ke aplikasi.
-4. Mengatur konfigurasi template di TEMPLATES untuk memproses file template HTML. Saat APP_DIRS true, Django mencari folder templates di aplikasi yang ada di INSTALLED_APPS. context_processors menambahkan variabel ke template, seperti request, auth, dan messages.
-5. Menentutan static files (CSS, JavaScript, Images). STATIC_URL mendefinisikan URL untuk static file
+Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+Jawaban:
+is_valid() berfungsi sebagai validasi data yang diterima user. Method akan cek tiap field di form dan memastikan kalau data yang masuk memenuhi kriteria
 
-CARA KERJA MIGRASI DATABASE
-Migrasi database adalah fitur Django yang mengelola perubahan skema basis data. Proses ini terdiri dari dua langkah yang wajib dilakukan setiap kali mengubah model di file models.py
-1. Menjalankan perintah python manage.py makemigrations
-Django memindah semua perubahan pada model. Perintah ini akan membuat migrasi baru di dalam folder migrations aplikasi. File ini berisi langkah-langkah untuk mengubah  struktur tabel agar sesuai dengan model.
-2. Menjalankan perintah python manage.py migrate
-Django membaca file migrasi di langkah sebelumnya dan menerapkan instruksi di dalam basis data. Perintah ini membuat, mengubah, atau menghapus tabel di basis data, sesuai definisi model yang baru. Django juga melacak migrasi mana saja yang sudah diterapkan agar tidak dijalankan dua kali.
+Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+Jawaban:
+csrf_token dibutuhkan sebagai security untuk mencegah serangan berbahaya. Jika form tidak ada csrf_token, bisa ada yang membuat form palsu di web lain yang mengirimkan request ke server kita. Request itu akan diterima dan dijalankan tanpa kita tahu, bisa seperti data dihapus, sandi diubah, dan lainnya.
 
-ALASAN Django MENJADI PERMULAAN BELAJAR PERANGKAT LUNAK
-1. Django menggunakan pola MVT (model, view, template) yang mempermudah pemula memahami dan mengelola setiap bagian aplikasi.
-2. Proyek Django memiliki struktur yang teratur sehingga mudah dikelola, diuji, dan diperluaskan.
-3. Django berbasis Python, bahasa pemrograman yang mudah dipahami dan dibaca.
+Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Jawaban:
+1. Membuat direktori templates di root folder yang berisi base.html. Isinya dari tutorial 2
+2. Modifikasi DIRS di settings.py
+3. Membuat forms.py di main untuk struktur form yang menerima data items. Ada 2 class yaitu ItemsForm dan ItemsSizeForm (untuk item jersey dan jaket)
+4. Modifikasi views.py di main. Tambahkan Items.object.all() untuk mengambil semua objek Items di database. create_items untuk menghasilkan form yang menambajkan data produk ketika data di submit. show_items untuk mengambil objek News dan jika tidak ada akan ke halaman 404
+5. Tambahkan path URL create_items dan show_items ke urlpatterns di urls.py dalam main
+6. Di main.html, update content untuk menampilkan data produk dan "Add Product" yang redirect ke halaman form. Sesuaikan tampilannya mau menampilkan atribut apa saja.
+7. Di main/templates, buat create_items.html untuk halaman form input detail produk. Sesuaikan isinya apa saja.
+8. Di main/templates, buat items_detail.html untuk halaman saat klik 'Read More'. Sesuaikan tampilannya seperti apa untuk semua atributnya.
+9. Tambahkan url pws pada CSRF_TRUSTED_ORIGINS di settings.py
+10. Routing runserver untuk cek apakah sudah bisa add product dan sudah benar
+11. Di main/views.py, tambahkan import HttpResponse dan Serializer, serta fungsi show_xml, show_json, show_xml_by_id, dan show_json_by_id
+12. Di main/urls.py, tambahkan path URL fungsi tersebut ke urlpatterns
+13. Routing runserver lagi dan cek untuk tampilan xml, json, xml by id, dan json by id
+14. Cek juga ke postman
 
-FEEDBACK TUTORIAL 1
-Tidak ada. Tutorial 1 dapat dipahami dengan baik serta asdos juga stand by di Discord saat saya butuh bantuan.
+Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
+Jawaban:
+Tidak ada, asdos stand by di discord saat tutorial. Jadi pas ada kendala fatal push pws, bisa segera dibantu
+
+Screenshot hasil akses URL pada Postman
+![XML](<Screenshot 2025-09-15 221838.png>)
+![JSON](<Screenshot 2025-09-15 221614.png>)
+![XML by ID](<Screenshot 2025-09-15 221905.png>)
+![JSON by ID](<Screenshot 2025-09-15 221926.png>)
