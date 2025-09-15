@@ -1,7 +1,7 @@
 import uuid
 from django.db import models
 
-class News(models.Model):
+class Items(models.Model):
     CATEGORY_CHOICES = [
         ('sepatu', 'Sepatu Bola'),
         ('jersey', 'Jersey'),
@@ -22,6 +22,7 @@ class News(models.Model):
         ('xxl', 'XXL'),
     ]
     
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     price = models.IntegerField()
     description = models.TextField()
@@ -29,15 +30,15 @@ class News(models.Model):
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='update')
     is_featured = models.BooleanField(default=False)
     size = models.CharField(max_length=20, choices=SIZE_CHOICES, default='update')
-    jumlah_keranjang = models.PositiveIntegerField(default=0)
+    items_views = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return self.name
     
     @property
     def is_news_hot(self):
-        return self.news_views > 20
+        return self.items_views > 20
         
     def increment_views(self):
-        self.news_views += 1
+        self.items_views += 1
         self.save()

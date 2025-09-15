@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<p><a href="{% url 'main:show_main' %}"><button>← Back to Product List</button></a></p>
+
+<h1>{{ items.name }}</h1>
+<p>
+    <b>Category:</b>{{ items.get_category_display }} {% if items.is_featured %} | 
+    <b>Featured</b>{% endif %}{% if news.is_news_hot %} | 
+    <b>Hot</b>{% endif %} | Views: {{ items.items_views }}
+    <br>
+    <b>Price:</b> Rp{{ items.price }}
+    {% if items.get_size_display %}
+    <br>
+    <b>Size:</b> {{ items.get_size_display }}
+    {% endif %}
+</p>
+
+{% if items.thumbnail %}
+<img src="{{ items.thumbnail }}" alt="Product thumbnail" width="300">
+<br /><br />
+{% endif %}
+
+<p>{{ items.description }}</p>
+
+{% endblock content %}
