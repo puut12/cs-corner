@@ -36,7 +36,7 @@ class Items(models.Model):
         return self.name
     
     @property
-    def is_news_hot(self):
+    def is_items_hot(self):
         return self.items_views > 20
         
     def increment_views(self):
