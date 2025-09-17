@@ -8,7 +8,7 @@
     <b>Featured</b>{% endif %} | Views: {{ items.items_views }}
     <br>
     <b>Price:</b> Rp{{ items.price }}
-    {% if items.get_size_display %}
+    {% if items.size != 'update' %}
     <br>
     <b>Size:</b> {{ items.get_size_display }}
     {% endif %}
