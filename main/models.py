@@ -34,10 +34,6 @@ class Items(models.Model):
     
     def __str__(self):
         return self.name
-    
-    @property
-    def is_items_hot(self):
-        return self.items_views > 20
         
     def increment_views(self):
         self.items_views += 1
