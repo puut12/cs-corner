@@ -33,7 +33,7 @@
 <div>
     <h2><a href="{% url 'main:show_items' items.id %}">{{ items.name }}</a></h2>
     <p><b>{{ items.get_category_display }}</b>{% if items.is_featured %} |
-        <b>Featured</b>{% endif %} | Views: {{ items.items_views }}</p>
+        <b>Featured</b> <b>Price:</b> Rp{{ items.price }}{% endif %} | Views: {{ items.items_views }}</p>
 
     {% if items.thumbnail %}
     <img src="{{ items.thumbnail }}" alt="thumbnail" width="150" height="100">
