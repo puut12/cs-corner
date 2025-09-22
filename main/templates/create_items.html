@@ -1,6 +1,6 @@
 {% extends 'base.html' %} 
 {% block content %}
-<h1>Add Product</h1>
+<h1 style="color: blue;">Add Product</h1>
 
 <form method="POST">
   {% csrf_token %}
@@ -9,7 +9,7 @@
     <tr>
       <td></td>
       <td>
-        <input type="submit" value="Add PRODUCT" />
+        <input type="submit" value="Add PRODUCT" style="background-color: rgba(0, 136, 255, 0.368); color: black;"/>
       </td>
     </tr>
   </table>
