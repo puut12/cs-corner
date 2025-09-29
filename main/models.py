@@ -7,13 +7,10 @@ class Items(models.Model):
     CATEGORY_CHOICES = [
         ('sepatu', 'Sepatu Bola'),
         ('jersey', 'Baju Jersey'),
-        ('training', 'Celana Training'),
         ('jaket', 'Jaket'),
         ('bola', 'Bola'),
-        ('tas', 'Tas Bola'),
         ('poster', 'Poster'),
         ('figur', 'Figur Pemain'),
-        ('aksesoris', 'Aksesoris'),
     ]
 
     SIZE_CHOICES = [

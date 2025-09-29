@@ -12,13 +12,21 @@ from django.urls import reverse
 
 # Create your views here.
 @login_required(login_url='/login')
-def show_main(request):
+def show_main(request, category_name=None):
     filter_type = request.GET.get("filter", "all")
     if filter_type == "all":
         items_list = Items.objects.all()
     else:
         items_list = Items.objects.filter(user=request.user)
 
+    if category_name:
+        if category_name == 'apparel':
+            items_list = items_list.filter(category__in=['jersey', 'jaket'])
+        elif category_name == 'merchandise':
+            items_list = items_list.filter(category__in=['poster', 'figur'])
+        else:
+            items_list = items_list.filter(category=category_name)
+    
     context = {
         'app' : 'CS Corner',
         'name': request.user.username,
@@ -119,3 +127,27 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_items(request, id):
+    items = get_object_or_404(Items, pk=id)
+
+    if items.category in ['jersey', 'jaket']:
+        form_class = ItemsSizeForm
+    else:
+        form_class = ItemsForm
+    
+    form = form_class(request.POST or None, instance=items)
+    if form.is_valid() and request.method == 'POST':
+        form.save()
+        return redirect('main:show_main')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, "edit_items.html", context)
+
+def delete_items(request, id):
+    items = get_object_or_404(Items, pk=id)
+    items.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))

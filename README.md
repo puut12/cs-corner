@@ -1,5 +1,129 @@
 LINK PWS: https://putri-hamidah-cscorner.pbp.cs.ui.ac.id
 
+**TUGAS 5**
+
+**Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!**
+
+**JAWABAN**:
+1. **Inline Styles**
+- Yaitu CSS yang ditulis langsung di dalam HTML (```style="..."```)
+- Memiliki prioritas tertinggi dan akan menimpa semua aturan stylesheet eksternal atau internal
+- Contoh:
+```<p style="color: blue;">Teks ini akan berwarna biru</p>```
+
+2. **ID Selector**
+- Menggunakan ID pada tag sebagai selector-nya
+- ID bersifat unik dalam satu halaman web
+- ID dapat ditambahkan pada halaman template HTML
+- Contoh:
+```#content { color: blue; }```
+
+3. **Class Selector, Atribut Selector, dan Pseudo-class**
+- Class Selector menargetkan elemen berdasarkan atribut class (contoh: ```.date```)
+- Atribut Selector menargetkan elemen berdasarkan atributnya (contoh: ```[type="text"]```)
+- Pseudo-class menargetkan elemen pada keadaan tertentu (contoh: ```:hover```, ```:focus```)
+
+4. **Element Selector dan Pseudo-element**
+- Element Selector menargetkan elemen berdasarkan nama tag HTML-nya (contoh: ```h1```, ```p```)
+- Pseudo-element menargetkan bagian tertentu dari sebuah elemen (contoh: ```::before```, ```::after```)
+
+**Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa!**
+
+**JAWABAN**:
+1. Pengguna bisa mengakses website dari berbagai perangkat. Dengan responsive design, tampilan akan otomatis menyesuaikan ukuran layar
+2. Tidak perlu membuat 2 versi website terpisah. Cukup satu website dengan CSS responsive
+3. Google memberi peringkat lebih tinggi pada website yang mobile-friendly. Jadi responsive design bisa meningkatkan visibilitas di mesin pencari dengan SEO (Search Engine Optimization)
+4. Website bisa dijangkau siapa saja, baik dari layar kecil maupun besar, tanpa hambatan tampilan
+
+Aplikasi yang sudah menerapkan responsive design: **Netflix**
+- Di desktop, Netflix menampilkan banyak thumbnail dalam format grid horizontal
+- Di smartphone, tata letaknya berubah menjadi vertikal dengan thumbnail yang lebih besar dan tombol navigasi dipindahkan ke bagian bawah layar, jadinya memudahkan user untuk mengaksesnya dengan satu tangan
+- Interaksi hover (menggerakkan kursor di atas elemen) di desktop digantikan dengan satu ketukan di perangkat sentuh. Tombol juga diperbesar agar mudah disentuh
+- Menu navigasi yang lebar di desktop berubah menjadi menu hamburger atau bilah navigasi tetap di bagian bawah layar pada perangkat seluler. Ini membuat perpindahan antar halaman lebih mudah
+
+Aplikasi yang belum menerapkan responsive design: **beberapa situs portal kampus seperti SIAK NG**
+- Situs-situs ini sering kali memiliki desain tetap (fixed layout) yang dioptimalkan hanya untuk layar desktop
+- Saat diakses dari smartphone, tampilannya tidak berubah, sehingga pengguna harus memperbesar layar (pinch-to-zoom) dan menggeser ke samping (scrolling horizontally) untuk membaca konten atau menekan tombol
+
+**Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut**
+
+**JAWABAN**:
+1. **Margin**
+- Merupakan area kosong di luar border
+- Fungsinya untuk memberi jarak antar elemen
+- Transparan (tidak punya warna)
+- Contoh: bikin jarak antara ```<div>``` dengan elemen di sebelahnya
+2. **Border**
+- Merupakan garis yang mengelilingi padding + content
+- Bisa punya warna, ketebalan, dan gaya (solid, dashed, dotted, dll)
+- Contoh: bikin kotak dengan garis tepi berwarna hitam
+3. **Padding**
+- Merupakan area kosong di dalam border, antara border dan isi konten
+- Fungsinya untuk memberi ruang agar teks/gambar tidak mepet border
+- Transparan, tapi bisa terlihat kalau diberi background
+
+Implementasinya:
+```
+.box {
+    width: 200px;
+    background-color: lightblue;
+
+    /* Padding → jarak antara teks dan border */
+    padding: 20px;
+
+    /* Border → garis pembungkus */
+    border: 5px solid navy;
+
+    /* Margin → jarak elemen ini dengan elemen lain */
+    margin: 30px;
+}
+```
+
+**Jelaskan konsep flex box dan grid layout beserta kegunaannya!**
+
+**JAWABAN**:
+
+**Flexbox (Flexible Box Layout)** adalah sistem layout CSS satu dimensi yang digunakan untuk menyusun elemen dalam baris (row) atau kolom (column) secara fleksibel. Flexbox memungkinkan elemen diatur arah tata letaknya, mudah diposisikan (awal, tengah, akhir), dan ruang antar elemen dapat diatur secara proporsional. Elemen-elemen di dalamnya juga bisa menyesuaikan ukuran otomatis sesuai ruang yang tersedia.
+
+Kegunaan Flexbox:
+1. Membuat navbar responsif
+2. Menyusun card atau box agar sejajar rapi
+3. Mengatur tombol jadi rata tengah atau rata kanan/kiri
+4. Menyusun list item agar fleksibel
+
+**Grid Layout** adalah sistem layout CSS dua dimensi yang memungkinkan penyusunan elemen secara horizontal (kolom) dan vertikal (baris). Grid membagi halaman menjadi grid cell (kotak-kotak), jadi  bisa menempatkan elemen dengan mudah sesuai posisi yang diinginkan. Dengan kontrol penuh atas ukuran kolom, baris, dan jarak antar elemen, Grid cocok untuk membuat struktur layout yang kompleks.
+
+Kegunaan Grid:
+1. Membuat layout halaman utama (header, sidebar, main content, footer)
+2. Menyusun galeri foto dengan jumlah kolom tertentu
+3. Mendesain dashboard dengan banyak card teratur
+4. Mengatur template halaman dengan struktur yang konsisten
+
+**Implementasi checklist secara step-by-step**
+
+**JAWABAN**:
+
+1. Untuk styling dengan tailwind, di ```templates/base.html```, tambahkan tag ```<meta name="viewport">```, tambahkan script cdn tailwind di bagian head
+2. Untuk implementasi fungsi edit product. di ```views.py/main```, tambahkan fungsi ```edit_items``` yang menerima parameter request dan id. Untuk variable ```form_class``` disesuaikan tergantung ```item_category```, ada ```ItemsSizeForm``` dan ```ItemsForm```
+3. Buatlah ```edit_itenms.html``` pada ```main/templates```. Isinya dari tutorial 4
+4. Di ```urls.py/main```, tambahkan import ```edit_items``` dan ```path('items/<uuid:id>/edit', edit_items, name='edit_items'),```
+5. Di ```main.html``` pada ```main/templates```, tambahkan kode untuk tombol edit pada loop ```items_list```
+6. Untuk implementasi fungsi delete product. di ```views.py/main```, tambahkan fungsi ```delete_items``` yang menerima parameter request dan id. Isinya dari tutorial 4
+7. Di ```urls.py/main```, tambahkan import ```delete_items``` dan ```path('items/<uuid:id>/delete', delete_items, name='delete_items'),```
+8. Di ```main.html``` pada ```main/templates```, tambahkan kode untuk tombol delete pada loop ```items_list```
+9. Buat ```navbar.html``` di ```templates```, isi masih dari tutorial 4 untuk sementara
+10. Pada ```settings.py```, tambahkan middleware WhiteNoise serta konfigurasi STATIC_ROOT, STATICFILES_DIRS, dan STATIC_URL
+11. Modifikasi ```base.html``` untuk menghubungkan ```global.css``` dan script Tailwind ke ```base.html```. Isi dari tutorial 4
+12. Custom styling ke global.css. Isi dari tutorial 4
+13. Styling navbar. Ubah berkas ```navbar.html```. Kustomisasi: title di kiri yaitu CS Corner (C-nya biru, S-nya merah, Corner-nya hitam), menu navigasi di tengah (Home, Shoes, Apparel, Balls, Merchandise, Create Product), user section (logout, login, register) di kanan
+14. Karena untuk jersey dan jaket itu masuk ke apparel, serta poster dan figur masuk ke merchandise. Jadi, pada fungsi ```show_main``` di ```views.py/main```, tambahkan if else untuk category_name, lalu di ```urls.py/main``` tambahkan ```path('category/<str:category_name>/', show_main, name='show_category'),```
+15. Styling halaman login. Ubah berkas ```login.html```. Kustomisasi: tombolnya warna biru, sisanya sama dari tutorial 4
+16. Styling halaman register. Ubah berkas ```register.html```. Kustomisasi: tombolnya warna biru, sisanya sama dari tutorial 4
+17. Styling halaman home. Buat ```card_items.html``` di ```main/templates```. Tiap card ada foto, nama produk (tebal), deskripsi, harga (tebal), jumlah views di ujung, tombol Selengkapnya di bawah, tombol edit sama delete. Kalau tampilan kosong, muncul ```no-items.png```, jadi ubah juga ```main.html```
+18. Styling halaman detail product. Ubah berkas ```items_detail.html```. Kustomisasi: Tombol warna disesuaikan. Mirip tutorial 4, ada name, price, description, size, views
+19. Styling halaman create product. Ubah berkas ```create_items.html```. Kustomisasi: Tombol disesuaikan, warnanya juga. Mirip tutorial 4
+20. Styling halaman edit product. Ubah berkas ```edit_items.html```. Kustomisasi: Tombol disesuaikan, warnanya juga. Mirip tutorial 4
+
 **TUGAS 4**
 
 **Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.**
