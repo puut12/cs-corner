@@ -28,7 +28,7 @@ class Items(models.Model):
     thumbnail = models.URLField(blank=True, null=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='update')
     is_featured = models.BooleanField(default=False)
-    size = models.CharField(max_length=20, choices=SIZE_CHOICES, default='update')
+    size = models.CharField(max_length=20, choices=SIZE_CHOICES, blank=True, null=True)
     items_views = models.PositiveIntegerField(default=0)
     
     def __str__(self):

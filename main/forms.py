@@ -4,7 +4,7 @@ from main.models import Items
 class ItemsForm(ModelForm):
     class Meta:
         model = Items
-        fields = ["name", "price", "description", "thumbnail", "category", "is_featured"]
+        fields = ["name", "price", "description", "thumbnail", "category", "is_featured", "size"]
 
 class ItemsSizeForm(ModelForm):
     class Meta:
