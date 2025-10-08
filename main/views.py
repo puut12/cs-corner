@@ -239,7 +239,7 @@ def create_items_ajax(request):
 
         return JsonResponse({
             "status": "success",
-            "message": "Produk berhasil ditambahkan melalui AJAX."
+            "message": "Product added successfully"
         }, status=201)
 JsonResponse({"status": "error", "message": "Invalid request method."}, status=405)
 
@@ -274,6 +274,6 @@ def delete_items_ajax(request, id):
     try:
         item = Items.objects.get(pk=id, user=request.user)
         item.delete()
-        return JsonResponse({"status": "success", "message": "Produk berhasil dihapus."}, status=200)
+        return JsonResponse({"status": "success", "message": "Product deleted successfully"}, status=200)
     except Items.DoesNotExist:
-        return JsonResponse({"status": "error", "message": "Produk tidak ditemukan atau Anda tidak punya hak akses."}, status=404)
+        return JsonResponse({"status": "error", "message": "Product not found or you do not have access rights"}, status=404)
