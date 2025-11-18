@@ -14,6 +14,8 @@ from django.views.decorators.http import require_POST
 from datetime import datetime
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
+from django.db.models import Q
+import json
 
 # Create your views here.
 @login_required(login_url='/login')
@@ -78,13 +80,13 @@ def get_thumbnail_url(thumbnail_field):
 
 def show_json(request):
     category_name = request.GET.get('category', None)
-    items_list = Items.objects.all()
+    items_list = Items.objects.select_related('user').all()
 
     if category_name and category_name != 'all':
         if category_name == 'apparel':
-            items_list = items_list.filter(category__in=['jersey', 'jaket'])
+            items_list = items_list.filter(Q(category='Baju Jersey') | Q(category='Jaket'))
         elif category_name == 'merchandise':
-            items_list = items_list.filter(category__in=['poster', 'figur'])
+            items_list = items_list.filter(Q(category='Poster') | Q(category='Figur Pemain'))
         else:
             items_list = items_list.filter(category=category_name)
 
@@ -100,6 +102,7 @@ def show_json(request):
             'size': item.size,
             'items_views': item.items_views,
             'user': item.user.id if item.user else None,
+            'user_username': item.user.username if item.user else None,
         }
         for item in items_list
     ]
@@ -277,3 +280,27 @@ def delete_items_ajax(request, id):
         return JsonResponse({"status": "success", "message": "Product deleted successfully"}, status=200)
     except Items.DoesNotExist:
         return JsonResponse({"status": "error", "message": "Product not found or you do not have access rights"}, status=404)
+    
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            new_product = Items.objects.create(
+                user=request.user,
+                name=data["name"],
+                price=int(data["price"]),
+                description=data["description"],
+                category=data["category"],
+                size=data["size"],
+                thumbnail=data["thumbnail"],
+                is_featured=data["is_featured"]
+            )
+
+            new_product.save()
+
+            return JsonResponse({"status": "success"}, status=200)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
+    return JsonResponse({"status": "error"}, status=401)
